@@ -1,0 +1,58 @@
+{
+    "version": "0.9.0",
+    "description": "Privacy-first, GPU-accelerated speech-to-text desktop app that transcribes locally on your machine",
+    "homepage": "https://echophrase.com",
+    "license": {
+        "identifier": "Proprietary",
+        "url": "https://echophrase.com/terms"
+    },
+    "notes": [
+        "Echophrase was installed by Scoop, so its built-in updater is disabled.",
+        "Update it with: scoop update echophrase",
+        "",
+        "Settings live in %APPDATA%\\com.imperium42.echophrase and downloaded speech",
+        "models in ~\\.cache\\huggingface\\hub. Both are outside the Scoop prefix, so they",
+        "survive uninstall. Delete them by hand if you want a completely clean removal."
+    ],
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/imperium42/echophrase-releases/releases/download/v0.9.0/Echophrase_0.9.0_x64-setup.exe#/setup.exe",
+            "hash": "c64d52f6317597127477adc2a030645e2c5346eb49d5c73741b6cf2ec0cc617f"
+        }
+    },
+    "pre_install": "if ($dir -match ' ') { error 'The installation directory cannot include a space'; break }",
+    "installer": {
+        "script": [
+            "# Start-Process is required because the NSIS installer misbehaves when its args are quoted (e.g. \"`\"/S`\"\").",
+            "# /D= must be the last argument, cannot be quoted, and cannot contain a space (guarded in pre_install).",
+            "# Move the installer up one level first: NSIS installs into $dir, and Scoop has already downloaded setup.exe there.",
+            "Move-Item \"$dir\\setup.exe\" \"$dir\\..\\setup.exe\" | Out-Null",
+            "Start-Process \"$dir\\..\\setup.exe\" -ArgumentList @('/S', \"/D=$dir\") -Wait | Out-Null"
+        ]
+    },
+    "post_install": [
+        "Remove-Item \"$dir\\..\\setup.exe\" -Force | Out-Null",
+        "# Tells the app a package manager owns this install, so it disables its own",
+        "# updater and points the user at 'scoop update echophrase' instead.",
+        "Set-Content -Path \"$dir\\.managed-install\" -Value 'scoop' -NoNewline -Encoding ASCII"
+    ],
+    "uninstaller": {
+        "script": [
+            "# Run the app's own NSIS uninstaller so the registry entries it created -",
+            "# including the echophrase:// deep-link scheme used by sign-in - are removed.",
+            "if (Test-Path \"$dir\\uninstall.exe\") {",
+            "    Start-Process \"$dir\\uninstall.exe\" -ArgumentList '/S' -Wait | Out-Null",
+            "}"
+        ]
+    },
+    "checkver": {
+        "github": "https://github.com/imperium42/echophrase-releases"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/imperium42/echophrase-releases/releases/download/v$version/Echophrase_$version_x64-setup.exe#/setup.exe"
+            }
+        }
+    }
+}
