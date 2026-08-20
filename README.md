@@ -38,3 +38,11 @@ at `scoop update echophrase` instead of updating itself.
 Echophrase is also on [winget](https://github.com/microsoft/winget-pkgs)
 (`winget install Imperium42.Echophrase`) and Homebrew
 (`brew install --cask imperium42/tap/echophrase`).
+
+## Maintenance
+
+`bucket/echophrase.json` is kept current by the scheduled
+[excavator workflow](.github/workflows/excavator.yml), which runs Scoop's own
+`checkver`/autoupdate against
+[imperium42/echophrase-releases](https://github.com/imperium42/echophrase-releases)
+and commits the new version and hash automatically.

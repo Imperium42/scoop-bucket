@@ -1,0 +1,24 @@
+# Keeps bucket/echophrase.json pointed at the latest stable release.
+#
+# `checkver` resolves /releases/latest on imperium42/echophrase-releases, which
+# only ever names a non-prerelease build - betas publish with --prerelease and
+# --latest=false, so this never picks one up.
+name: Excavator
+on:
+  schedule:
+    - cron: '17 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  excavate:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Excavate
+        uses: ScoopInstaller/GithubActions@main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SKIP_UPDATED: '1'
