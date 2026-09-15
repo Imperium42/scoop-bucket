@@ -40,8 +40,12 @@
         "script": [
             "# Run the app's own NSIS uninstaller so the registry entries it created -",
             "# including the echophrase:// deep-link scheme used by sign-in - are removed.",
+            "# _?= is required: without it the NSIS uninstaller copies itself to %TEMP%, relaunches",
+            "# and exits at once, so -Wait returns early and Scoop deletes $dir mid-uninstall - leaving",
+            "# a stale HKCU Uninstall key that breaks the next GUI install ('Unable to uninstall!').",
+            "# _?= must be the last argument, unquoted, space-free (guarded in pre_install).",
             "if (Test-Path \"$dir\\uninstall.exe\") {",
-            "    Start-Process \"$dir\\uninstall.exe\" -ArgumentList '/S' -Wait | Out-Null",
+            "    Start-Process \"$dir\\uninstall.exe\" -ArgumentList @('/S', \"_?=$dir\") -Wait | Out-Null",
             "}"
         ]
     },
