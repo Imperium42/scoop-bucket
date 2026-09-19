@@ -1,5 +1,5 @@
 {
-    "version": "0.9.3",
+    "version": "0.9.4",
     "description": "Privacy-first, GPU-accelerated speech-to-text desktop app that transcribes locally on your machine",
     "homepage": "https://echophrase.com",
     "license": {
@@ -16,8 +16,8 @@
     ],
     "architecture": {
         "64bit": {
-            "url": "https://github.com/imperium42/echophrase-releases/releases/download/v0.9.3/Echophrase_0.9.3_x64-setup.exe#/setup.exe",
-            "hash": "fb60f4b03f588941047e3fd6501991a075f7bef70b23b03516b2b71e72eec9fe"
+            "url": "https://github.com/imperium42/echophrase-releases/releases/download/v0.9.4/Echophrase_0.9.4_x64-setup.exe#/setup.exe",
+            "hash": "bbc88d817f18670da4d77e90fb8d0a64ac71b0f112fa61b856b4d3f7b9b40f67"
         }
     },
     "pre_install": "if ($dir -match ' ') { error 'The installation directory cannot include a space'; break }",
