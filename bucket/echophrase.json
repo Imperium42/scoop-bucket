@@ -1,10 +1,10 @@
 {
     "version": "1.0.0",
-    "description": "Privacy-first, GPU-accelerated speech-to-text desktop app that transcribes locally on your machine",
+    "description": "Free, open-source, privacy-first speech-to-text that transcribes locally on your machine",
     "homepage": "https://echophrase.com",
     "license": {
-        "identifier": "Proprietary",
-        "url": "https://echophrase.com/terms"
+        "identifier": "MPL-2.0",
+        "url": "https://github.com/Imperium42/echophrase/blob/main/LICENSE"
     },
     "notes": [
         "Echophrase was installed by Scoop, so its built-in updater is disabled.",
@@ -38,8 +38,7 @@
     ],
     "uninstaller": {
         "script": [
-            "# Run the app's own NSIS uninstaller so the registry entries it created -",
-            "# including the echophrase:// deep-link scheme used by sign-in - are removed.",
+            "# Run the app's own NSIS uninstaller so the registry entries it created are removed.",
             "# _?= is required: without it the NSIS uninstaller copies itself to %TEMP%, relaunches",
             "# and exits at once, so -Wait returns early and Scoop deletes $dir mid-uninstall - leaving",
             "# a stale HKCU Uninstall key that breaks the next GUI install ('Unable to uninstall!').",
