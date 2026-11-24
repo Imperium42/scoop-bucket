@@ -1,5 +1,5 @@
 {
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Free, open-source, privacy-first speech-to-text that transcribes locally on your machine",
     "homepage": "https://echophrase.com",
     "license": {
@@ -16,8 +16,8 @@
     ],
     "architecture": {
         "64bit": {
-            "url": "https://github.com/imperium42/echophrase-releases/releases/download/v1.0.0/Echophrase_1.0.0_x64-setup.exe#/setup.exe",
-            "hash": "d41276d2cf42e2569a179e20347931be05e887ab5c80485220a6e909d62f3c56"
+            "url": "https://github.com/imperium42/echophrase-releases/releases/download/v1.0.1/Echophrase_1.0.1_x64-setup.exe#/setup.exe",
+            "hash": "5aacd5b0a7fef49c0047fe225fc98cdedd01a36cb248fbb15676c48e8fbe2d94"
         }
     },
     "pre_install": "if ($dir -match ' ') { error 'The installation directory cannot include a space'; break }",
